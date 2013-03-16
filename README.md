@@ -17,24 +17,27 @@ var tone = require("tonegenerator");
 var header = require("headerwriter");
 var fs = require("fs");
 
-// An a major chord
+// An A-major chord
 var tone1 = tone(440, 2);
 var tone2 = tone(554.37, 2);
 var tone3 = tone(659.26, 2);
 
-// playing one tone at the time
+// "playing" one tone at the time
+// note that at this time, our sound is just an array 
+// of gain values. By appending the raw PCM data for one after another,
+// we can play them in a sequence
 var res = [].concat(tone1);
 res = res.concat(tone2);
 res = res.concat(tone3);
 
-// after that, play all tones simultaneously
-// as a chord
+// By adding values of the tones for each sample,
+// we play them simultaneously, as a chord
 for(var i = 0; i < tone1.length; i++) {
   res.push(tone1[i] + tone2[i] + tone3[i]);
 }
 
 // write to file (note conversion to buffer!)
-var writer = new fs.createWriteStream("A-Csharp.wav");
+var writer = new fs.createWriteStream("A-major.wav");
 writer.write(header( 44100 * 8 ));
 writer.write(new Buffer(res));
 writer.end();
