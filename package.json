@@ -1,11 +1,16 @@
 {
   "name": "tonegenerator",
   "description": "Generates a tone as raw PCM WAV data, so you can do operations on it",
+  "version": "0.0.1",
   "author": {
     "name": "Karl Westin",
     "email": "karl.westin@gmail.com"
   },
-  "keywords": [],
+  "repository" : { 
+    "type" : "git", 
+    "url" : "https://github.com/karlwestin/node-tonegenerator.git"
+  }
+  "keywords": ["audio", "tone", "frequency", "wav", "pcm"],
   "dependencies": {},
   "main": "./index.js",
   "engines": {
