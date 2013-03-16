@@ -1,0 +1,15 @@
+{
+  "name": "tonegenerator",
+  "description": "Generates a tone as raw PCM WAV data, so you can do operations on it",
+  "author": {
+    "name": "Karl Westin",
+    "email": "karl.westin@gmail.com"
+  },
+  "keywords": [],
+  "dependencies": {},
+  "main": "./index.js",
+  "engines": {
+    "node": ">= v0.6.x"
+  },
+  "readmeFilename": "README.md",
+}
