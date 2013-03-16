@@ -9,12 +9,9 @@
   "repository" : { 
     "type" : "git", 
     "url" : "https://github.com/karlwestin/node-tonegenerator.git"
-  }
+  },
   "keywords": ["audio", "tone", "frequency", "wav", "pcm"],
   "dependencies": {},
   "main": "./index.js",
-  "engines": {
-    "node": ">= v0.6.x"
-  },
-  "readmeFilename": "README.md",
+  "readmeFilename": "README.md"
 }
