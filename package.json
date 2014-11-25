@@ -1,7 +1,7 @@
 {
   "name": "tonegenerator",
   "description": "Generates a tone as raw PCM WAV data, so you can do operations on it",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": {
     "name": "Karl Westin",
     "email": "karl.westin@gmail.com"
