@@ -14,7 +14,7 @@ Before writing to a file, you need to convert it to a buffer:
 
 ```javascript
 var tone = require("tonegenerator");
-var header = require("headerwriter");
+var header = require("waveheader"); // https://www.npmjs.org/package/waveheader
 var fs = require("fs");
 
 // An A-major chord
@@ -38,7 +38,7 @@ for(var i = 0; i < tone1.length; i++) {
 
 // write to file (note conversion to buffer!)
 var writer = new fs.createWriteStream("A-major.wav");
-writer.write(header( 44100 * 8 ));
+writer.write(header( 44100 * 8 )); // 44100 Hz * 8 seconds
 writer.write(new Buffer(res));
 writer.end();
 ```
