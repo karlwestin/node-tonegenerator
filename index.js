@@ -1,6 +1,6 @@
 /*
  * ToneGenerator for node.js
- * generates raw PCM data for a tone, 
+ * generates raw PCM data for a tone,
  * specify length and frequency
  */
 function generateCycle(cycle, volume) {
@@ -13,12 +13,12 @@ function generateCycle(cycle, volume) {
   return data;
 }
 
-module.exports = function(freq, lengthInSecs) {
+module.exports = function(freq, lengthInSecs, volume) {
   freq = freq || 440;
   lengthInSecs = lengthInSecs || 2.0;
+  volume = volume || 30
 
   var cycle = Math.floor(44100/freq);
-  var volume = 30;
   var samplesLeft = lengthInSecs * 44100;
   var cycles = samplesLeft/cycle;
   var ret = [];
