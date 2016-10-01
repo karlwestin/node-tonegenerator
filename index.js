@@ -7,7 +7,7 @@ function generateCycle(cycle, volume) {
   var data = [];
   var tmp;
   for(var i = 0; i < cycle; i++) {
-    tmp = volume * Math.sin((i/cycle) * Math.PI * 2);
+    tmp = Math.min(volume * Math.sin((i/cycle) * Math.PI * 2), volume - 1)
     data[i] = Math.round(tmp);
   }
   return data;
@@ -30,3 +30,6 @@ module.exports = function(freq, lengthInSecs, volume, rate) {
 
   return ret;
 };
+
+module.exports.MAX_16 = 32768;
+module.exports.MAX_8 = 128;
