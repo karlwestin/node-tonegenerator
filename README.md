@@ -5,12 +5,17 @@ This thing generates raw PCM data, specified by
 a frequency and length in seconds.
 
 ```javascript
-tone(frequency, lengthInSeconds, [volumen])
+tone(frequency, lengthInSeconds, volume = 30, sampleRate, = 44100)
 ```
+
+**volume** and **sampleRate** are optional, the default is shown above.
+**If you want to specify sampleRate, you have to specify volume!**
+
 
 ```javascript
 var tone = require("tonegenerator");
 var A440 = tone(440, 20, 30); // get PCM data for a 440hz A, 20 seconds, volume 30
+var A440_low_sample = tone(440, 20, 30, 22050); // this array has lower sample rate and will only be half as long
 ```
 
 I'm really unsure what the 'volume' value means, but you can use it to create
@@ -21,7 +26,9 @@ Before writing to a file, you need to convert it to a buffer:
 
 ```javascript
 var tone = require("tonegenerator");
-var header = require("waveheader"); // https://www.npmjs.org/package/waveheader
+// Use this package to write a header for the wave file
+// https://www.npmjs.org/package/waveheader
+var header = require("waveheader");
 var fs = require("fs");
 
 // An A-major chord
