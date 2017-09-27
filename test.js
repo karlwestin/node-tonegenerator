@@ -70,4 +70,17 @@ assert.strictEqual(tone7.shift(), 10)
 assert(!tone7.includes(0))
 
 
+console.log('Testing old-style interface')
+var tone8 = tonegenerator(440, 2, 10)
+var tone9 = tonegenerator(440, 2, 30)
+var tonefrequency2 = tonegenerator(440, 2, 10, 22050)
+// takes the volume argument - 1 as max
+assert.strictEqual(Math.max.apply(Math, tone8), 9)
+// takes the volume argument as min
+assert.strictEqual(Math.min.apply(Math, tone8), -10)
+// takes the volume argument as max
+assert.strictEqual(Math.max.apply(Math, tone9), 29)
+
+assert.equal(tone8.length/2, tonefrequency2.length, 'when halving audio sampling rate, the array length should be half of default')
+
 console.log('...done')

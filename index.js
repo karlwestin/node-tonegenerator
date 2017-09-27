@@ -54,7 +54,7 @@ function generateCycle(cycle, volume, shape) {
   return data;
 }
 
-module.exports = function(opts) {
+function generateWaveForm(opts) {
   opts = opts || {}
   var freq = opts.freq || 440;
   var rate = opts.rate || 44100
@@ -73,6 +73,20 @@ module.exports = function(opts) {
 
   return ret;
 };
+
+module.exports = function() {
+  // to support both old interface and the new one:
+  var opts = arguments[0]
+  if (arguments.length > 1 && typeof opts === "number") {
+    opts = {}
+    opts.freq = arguments[0]
+    opts.lengthInSecs = arguments[1]
+    opts.volume = arguments[2]
+    opts.rate = arguments[3]
+  }
+
+  return generateWaveForm(opts)
+}
 
 module.exports.MAX_16 = 32768;
 module.exports.MAX_8 = 128;

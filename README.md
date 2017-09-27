@@ -1,23 +1,47 @@
 ToneGenerator for node.js
 ====
 
-This thing generates raw PCM data, specified by
-a frequency and length in seconds.
+This thing generates an array of numbers in waveforms. This waveform can be written into a wavefile as raw PCM data.
+It does not play the sounds. If you want to play sounds, make sure to read the examples on how to write wave files below.
 
 ## Generating Tones:
 
 ```javascript
-tone(frequency, lengthInSeconds, volume = 30, sampleRate = 44100)
+var tone = require('tonegenerator')
+
+// New Interface! More options!!
+var tonedata = tone({
+  freq: 440,
+  lengthInSecs: 2.0,
+  volume: 30,
+  sampleRate: 44100,
+  shape: 'triangle'
+})
+
+// The old interface, still available for compatibility
+var tonedata = tone(frequency, lengthInSeconds, volume = 30, sampleRate = 44100)
 ```
 
+#### Using the new interface
+- **freq** frequency in hertz. *defaults to 440*
+- **lengthInSecs** controls the length of the array output together with the samplerate *defaults to 2.0*
+- **volume** controls max/min for the array values. If you intend to write 8-bit it should be less than or equal to tone.MAX_8, if 16 bit it should be less than or equal to tone.MAX_16. *defaults to 30*
+- **sampleRate** number of samples per second. Together with lengthInSecs, this define the length of the output array (lengthInSeccs * sampleRate). *defaults to 44100*
+- **shape** controls the wave shape. Options are *'triangle', 'square', 'sine', 'saw'*. You can also pass in a custom function, see the tests for an example of this. *defaults to 'sine'*
+
+#### Using the old interface
 **volume** and **sampleRate** are optional, the default is shown above.
 **If you want to specify sampleRate, you have to specify volume!**
 
+#### Useful constants
+```javascript
+tone.MAX_8 // max volume to be used with 8-bit sound
+tone.MAX_16 // max volume for 16 bit sound
 
 ```javascript
 var tone = require('tonegenerator');
-var A440 = tone(440, 20, 30); // get PCM data for a 440hz A, 20 seconds, volume 30
-var A440_low_sample = tone(440, 20, 30, 22050); // this array has lower sample rate and will only be half as long
+var A440 = tone({ freq: 440, lengthInSeconds: 20, volume: 30 }); // get PCM data for a 440hz A, 20 seconds, volume 30
+var A440_low_sample = tone(440, 20, 30, 22050); // (old interface) this array has lower sample rate and will only be half as long
 ```
 
 The data is returned as a normal array, so you can do operations on it.
@@ -26,9 +50,9 @@ The data is returned as a normal array, so you can do operations on it.
 
 ```javascript
 // An A-major chord
-var tone1 = tone(440, 2, 60)
-var tone2 = tone(554.37, 2, 30)
-var tone3 = tone(659.26, 2, 30)
+var tone1 = tone({ freq: 440, lengthInSecs: 2, volume: 60 })
+var tone2 = tone({ freq: 554.37, lengthInSecs: 2, volume: 30 })
+var tone3 = tone({ freq: 659.26, lengthInSecs: 2, volume: 30 })
 
 // "playing" one tone at the time
 // note that at this time, our sound is just an array
@@ -58,7 +82,7 @@ var header = require('waveheader');
 var fs = require('fs');
 
 var file = fs.createWriteStream('8bit-example.wav')
-var samples = tone(440, 2, tone.MAX_8)
+var samples = tone({ freq: 440, lengthInSecs: 2, volume: tone.MAX_8 })
 
 file.write(header(samples.length, {
   bitDepth: 8
@@ -90,7 +114,7 @@ var header = require('waveheader');
 var fs = require('fs');
 
 var file = fs.createWriteStream('16bit-example.wav')
-var samples = tone(440, 2, tone.MAX_16)
+var samples = tone({ freq: 440, lengthInSecs: 2, volume: tone.MAX_16 })
 
 file.write(header(samples.length * 2, {
   bitDepth: 16
@@ -127,9 +151,9 @@ var fs = require('fs');
 
 var file = fs.createWriteStream('16bit-stereo.wav')
 // A loud A for channel 1
-var channel1 = tone(440, 2, tone.MAX_16)
+var channel1 = tone({ freq: 440, lengthInSecs: 2, volume: tone.MAX_16 })
 // A not so loud C for channel 2
-var channel2 = tone(554.37, 2, tone.MAX_16 / 4)
+var channel2 = tone({ freq: 554.37, lengthInSecs: 2, volume: tone.MAX_16 / 4 })
 
 // create an array where the 2 channels are interleaved:
 var samples = []
