@@ -30,8 +30,9 @@ var tonedata = tone(frequency, lengthInSeconds, volume = 30, sampleRate = 44100)
 - **shape** controls the wave shape. Options are *'triangle', 'square', 'sine', 'saw'*. You can also pass in a custom function, see the tests for an example of this. *defaults to 'sine'*
 
 #### Using the old interface
+The old interface takes four arguments: *freq, lengthInSecs, volume, sampleRate*.
 **volume** and **sampleRate** are optional, the default is shown above.
-**If you want to specify sampleRate, you have to specify volume!**
+**Shape is not available in the old interface. If you want to specify sampleRate, you have to specify volume!**
 
 #### Useful constants
 ```javascript
