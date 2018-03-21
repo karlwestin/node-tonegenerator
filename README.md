@@ -14,25 +14,25 @@ var tonedata = tone({
   freq: 440,
   lengthInSecs: 2.0,
   volume: 30,
-  sampleRate: 44100,
+  rate: 44100,
   shape: 'triangle'
 })
 
 // The old interface, still available for compatibility
-var tonedata = tone(frequency, lengthInSeconds, volume = 30, sampleRate = 44100)
+var tonedata = tone(frequency, lengthInSeconds, volume = 30, rate = 44100)
 ```
 
 #### Using the new interface
 - **freq** frequency in hertz. *defaults to 440*
 - **lengthInSecs** controls the length of the array output together with the samplerate *defaults to 2.0*
 - **volume** controls max/min for the array values. If you intend to write 8-bit it should be less than or equal to tone.MAX_8, if 16 bit it should be less than or equal to tone.MAX_16. *defaults to 30*
-- **sampleRate** number of samples per second. Together with lengthInSecs, this define the length of the output array (lengthInSeccs * sampleRate). *defaults to 44100*
+- **rate** sample rate, number of samples per second. Together with lengthInSecs, this define the length of the output array (lengthInSeccs * rate). *defaults to 44100*
 - **shape** controls the wave shape. Options are *'triangle', 'square', 'sine', 'saw'*. You can also pass in a custom function, see the tests for an example of this. *defaults to 'sine'*
 
 #### Using the old interface
-The old interface takes four arguments: *freq, lengthInSecs, volume, sampleRate*.
-**volume** and **sampleRate** are optional, the default is shown above.
-**Shape is not available in the old interface. If you want to specify sampleRate, you have to specify volume!**
+The old interface takes four arguments: *freq, lengthInSecs, volume, rate*.
+**volume** and **rate** are optional, the default is shown above.
+**Shape is not available in the old interface. If you want to specify rate, you have to specify volume!**
 
 #### Useful constants
 ```javascript
