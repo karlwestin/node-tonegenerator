@@ -13,6 +13,7 @@ var tone = require('tonegenerator')
 var tonedata = tone({
   freq: 440,
   lengthInSecs: 2.0,
+  lengthPrecision: 'round',
   volume: 30,
   rate: 44100,
   shape: 'triangle'
@@ -25,6 +26,7 @@ var tonedata = tone(frequency, lengthInSeconds, volume = 30, rate = 44100)
 #### Using the new interface
 - **freq** frequency in hertz. *defaults to 440*
 - **lengthInSecs** controls the length of the array output together with the samplerate *defaults to 2.0*
+- **lengthPrecision** controls how tones should try to match lengthInSecs. Options are *'clipexact', 'padexact', 'round'* The first two will produce consistent lengths for all frequencies and shapes. *defaults to 'round'*
 - **volume** controls max/min for the array values. If you intend to write 8-bit it should be less than or equal to tone.MAX_8, if 16 bit it should be less than or equal to tone.MAX_16. *defaults to 30*
 - **rate** sample rate, number of samples per second. Together with lengthInSecs, this define the length of the output array (lengthInSeccs * rate). *defaults to 44100*
 - **shape** controls the wave shape. Options are *'triangle', 'square', 'sine', 'saw'*. You can also pass in a custom function, see the tests for an example of this. *defaults to 'sine'*
@@ -39,7 +41,7 @@ The old interface takes four arguments: *freq, lengthInSecs, volume, rate*.
 tone.MAX_8 // max volume to be used with 8-bit sound
 tone.MAX_16 // max volume for 16 bit sound
 
-```javascript
+​```javascript
 var tone = require('tonegenerator');
 var A440 = tone({ freq: 440, lengthInSeconds: 20, volume: 30 }); // get PCM data for a 440hz A, 20 seconds, volume 30
 var A440_low_sample = tone(440, 20, 30, 22050); // (old interface) this array has lower sample rate and will only be half as long
