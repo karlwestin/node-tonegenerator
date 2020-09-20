@@ -60,17 +60,35 @@ function generateWaveForm(opts) {
   var rate = opts.rate || 44100
   var lengthInSecs = opts.lengthInSecs || 2.0;
   var volume = opts.volume || 30;
+  var lengthPrecision = opts.lengthPrecision || 'round';
   var shape = opts.shape || 'sine';
 
   var cycle = Math.floor(rate/freq);
-  var samplesLeft = lengthInSecs * rate;
+  var samplesLeft = Math.floor(lengthInSecs * rate);
   var cycles = samplesLeft/cycle;
+
+  switch (lengthPrecision) {
+    case 'clipexact':
+      cycles = Math.ceil(cycles);
+    case 'padexact':
+      cycles = Math.floor(cycles);
+    default:
+      cycles = Math.round(cycles);
+  }
+
   var ret = [];
 
   for(var i = 0; i < cycles; i++) {
     ret = ret.concat(generateCycle(cycle, volume, shape));
   }
 
+  switch (lengthPrecision) {
+    case 'padexact':
+      ret = ret.concat(new Array(samplesLeft - ret.length).fill(0));
+    case 'clipexact':
+      ret.splice(samplesLeft);
+  }
+  
   return ret;
 };
 
