@@ -65,10 +65,15 @@ function generateWaveForm(opts) {
   var cycle = Math.floor(rate/freq);
   var samplesLeft = lengthInSecs * rate;
   var cycles = samplesLeft/cycle;
-  var ret = [];
+
+  const ret = new Int16Array(samplesLeft);
+  let retIndex = 0;
 
   for(var i = 0; i < cycles; i++) {
-    ret = ret.concat(generateCycle(cycle, volume, shape));
+    const cycleValues = generateCycle(cycle, volume, shape);
+    cycleValues.forEach((value) => {
+      ret[retIndex++] = value;
+    });
   }
 
   return ret;
