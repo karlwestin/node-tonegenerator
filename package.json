@@ -1,29 +1,31 @@
 {
-  "name": "tonegenerator",
+  "name": "ecma-tonegen",
   "description": "Generates a tone as raw PCM WAV data, so you can do operations on it",
-  "version": "0.0.0-semantically-released",
+  "version": "1.0.0",
+  "license": "Apache-2.0",
   "scripts": {
-    "test": "node test.js",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "test": "node test.mjs"
   },
   "author": {
     "name": "Karl Westin",
-    "email": "karl.westin@gmail.com"
+    "email": "karl.westin@gmail.com",
+    "url": "https://github.com/karlwestin"
   },
+  "contributors": [
+    {
+      "name" : "mo-g",
+      "email" : "mo-g@spindoctor.dev",
+      "url" : "https://github.com/mo-g"
+    }
+  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/karlwestin/node-tonegenerator.git"
+    "url": "https://github.com/Combadge/ecma-tonegen.git"
   },
   "keywords": [
-    "audio",
-    "tone",
-    "frequency",
-    "wav",
-    "pcm"
+    "tone generator",
+    "sound generator",
+    "frequency generator"
   ],
-  "devDependencies": {
-    "semantic-release": "^4.3.5"
-  },
-  "main": "./index.js",
-  "readmeFilename": "README.md"
+  "main": "./index.mjs"
 }
