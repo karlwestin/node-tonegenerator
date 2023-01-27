@@ -90,7 +90,12 @@ module.exports = function() {
     opts.rate = arguments[3]
   }
 
-  return generateWaveForm(opts)
+  const data = generateWaveForm(opts)
+  if (opts.Int16Array) {
+    return data
+  }
+
+  return Array.from(data)
 }
 
 module.exports.MAX_16 = 32768;

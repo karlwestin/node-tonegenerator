@@ -3,7 +3,6 @@ var tonegenerator = require('./')
 
 console.log('Testing Tonegenerator...')
 
-
 var tone1 = tonegenerator({ freq: 440, lengthInSecs: 2, volume: 10 })
 var tone2 = tonegenerator({ freq: 440, lengthInSecs: 2, volume: 30 })
 var tonefrequency = tonegenerator({ freq: 440, lengthInSecs: 2, volume: 10, rate: 22050 })
@@ -82,5 +81,18 @@ assert.strictEqual(Math.min.apply(Math, tone8), -10)
 assert.strictEqual(Math.max.apply(Math, tone9), 29)
 
 assert.equal(tone8.length/2, tonefrequency2.length, 'when halving audio sampling rate, the array length should be half of default')
+
+console.log('Testing generating a 30 minute tone')
+
+var long = tonegenerator({
+  freq: 440,
+  lengthInSecs: 30 * 60,
+  volume: 60,
+  Int16Array: true
+})
+
+assert.equal(long instanceof Int16Array, true, 'Should have an Int16Array mode')
+long = null
+
 
 console.log('...done')

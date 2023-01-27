@@ -15,7 +15,8 @@ var tonedata = tone({
   lengthInSecs: 2.0,
   volume: 30,
   rate: 44100,
-  shape: 'triangle'
+  shape: 'triangle',
+  Int16Array: true // use this mode when generating very long notes
 })
 
 // The old interface, still available for compatibility

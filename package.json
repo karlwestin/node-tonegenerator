@@ -1,7 +1,7 @@
 {
   "name": "tonegenerator",
   "description": "Generates a tone as raw PCM WAV data, so you can do operations on it",
-  "version": "0.0.0-semantically-released",
+  "version": "0.3.3",
   "scripts": {
     "test": "node test.js",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
